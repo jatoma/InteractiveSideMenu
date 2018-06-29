@@ -231,7 +231,7 @@ private extension MenuInteractiveTransition {
         transitionStarted = false
 
         let animation : () -> Void = { [unowned self] in self.updateTransition(percentComplete: 0) }
-        let completion : (Bool) -> Void = { [unowned self] _ in
+        let completion : (Bool) -> Void = { [unowned self] completed in
             guard let transitionContext = self.transitionContext else {
                 fatalError("Invalid `transition.transitionContext` value. This property should not be nil")
             }
@@ -256,7 +256,7 @@ private extension MenuInteractiveTransition {
             toViewController.view.isUserInteractionEnabled = true
             fromViewController.view.isUserInteractionEnabled = true
 
-            transitionContext.completeTransition(false)
+            transitionContext.completeTransition(completed)
         }
 
         if options.useCancellingSpringSettings {
